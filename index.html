@@ -1,9 +1,31 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>My Word Game</title>
-</head>
-<body>
-  <h1>Word Game Challenge Page</h1>
-</body>
+  <head>
+    <title>Launching Word Game...</title>
+    <meta charset="UTF-8">
+    <script>
+      // Wait for DOM to load
+      window.onload = function () {
+        const params = new URLSearchParams(window.location.search);
+        const data = params.get("data");
+        
+        // Your custom URI scheme
+        const deepLink = `mywordgame://challenge?data=${data}`;
+        
+        // Fallback to Play Store if app is not installed
+        const fallbackUrl = "https://play.google.com/store/apps/details?id=com.sg.WordLink";
+
+        // Try to open the app
+        window.location.href = deepLink;
+
+        // If app isn't installed, redirect after a short delay
+        setTimeout(() => {
+          window.location.href = fallbackUrl;
+        }, 1500);
+      };
+    </script>
+  </head>
+  <body>
+    <p>Opening your word game...</p>
+  </body>
 </html>
